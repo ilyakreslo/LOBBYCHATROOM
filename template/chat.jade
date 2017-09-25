@@ -1,0 +1,66 @@
+-var pageTitle="chat"
+extends layout/page.jade
+block append scripts
+   script(src="/vendor/bower_components/socket.io-client/dist/socket.io.js")
+   script(src="/js/chat/rooms.js")
+   script(src="/js/chat/membersList.js")
+   script(src="/js/chat/chat.js")
+block append stylesheets
+   link(rel="stylesheet" href="/css/chat.css")
+
+block body
+   #main-container
+      #header
+         #me
+            #login
+         #exit
+            a(role="menuitem" tabindex="-1" href="" onclick="$('<form method=POST action=/logout>').appendTo('body').submit();return false").btn.btn-danger Logout
+      #left
+         #createbtn
+            a.btn.btn-default#addRoom Create room
+         #created
+               form#newRoom
+                  input(type="text" name="roomName" maxlength="32" required)
+                  button(type="submit") Create
+                  button.dismiss(type="button") Cancel
+         #chats
+            h4 Chats
+            ul#roomsList
+      #right
+         #room-controls
+            .btn.btn-xs.btn-success#invite
+               | Invite new members
+            .btn.btn-xs.btn-danger#leaveRoom
+               | Leave room
+         #right-header
+            h3 Users list
+         #right-content
+            #members-list
+               span online:
+               ul#online-users
+               span offline:
+               ul#offline-users
+
+      #center.container-fluid
+         #messages.row
+         #message-input.row
+            textarea#input.col-xs-11(maxlength="4000" disabled tabindex="1")
+
+   #inviteModal.modal.fade(tabindex="-1" role="dialog" aria-labelleby="inviteModalLabel")
+      .modal-dialog
+         .modal-content
+            .modal-header
+               button.close(type="button" data-dismiss="modal" aria-label="Close") &times;
+               h4#inviteModalLabel.modal-title Invite user
+            form
+               .modal-body
+                  .form-group
+                     label(for="invitedUsers") Users list
+                     br
+                     select#invitedUsers(multiple="multiple" size="15" name="invitedUsers[]" required)
+               .modal-footer
+                  button.btn.btn-default(type="button" data-dismiss="modal") Cancel
+                  button.btn.btn-primary(type="submit") Invite
+
+
+

@@ -1,0 +1,16 @@
+.navbar.navbar-default(role='navigation')
+   .container
+      .navbar-header
+      .navbar-collapse.collapse
+         ul.nav.navbar-nav
+            li
+               a(href='/') Main
+            if user
+               li
+                  a(href='/chat') Chat
+         ul.nav.navbar-nav.navbar-right
+            li
+               if user
+                  a(href="" onclick="$('<form method=POST action=/logout>').appendTo('body').submit();return false") Logout
+               else
+                  a(href="/login") Login

@@ -1,0 +1,18 @@
+-var pageTitle="Registration and Login"
+extends layout/page.jade
+block append scripts
+   script(src="/js/login.js")
+block content
+   form.form-horizontal.login-form.col-xs-12.col-sm-offset-3.col-sm-6.col-lg-4.col-lg-offset-4(name="login-form")
+      h4.form-group Enter your user name and password. If there is no such user, it will be created.
+      .form-group
+         label.control-label(for="input-username") User name
+         input.form-control#input-username(name="username" type="text" placeholder="Login" required)
+
+      .form-group
+         label.control-label(for="input-password") Password
+         input.form-control#input-password(name="password" type="password" placeholder="Password" required)
+
+      .form-group
+         button.btn.btn-primary(type="submit" data-loading-text="...") Login
+         span.help-block.error
